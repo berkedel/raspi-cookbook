@@ -38,10 +38,10 @@ And check whether you are already in the docker group.
 groups ${USER}
 ```
 
-By default, Raspberry Pi OS has python3 installed. We need to install pip3 before installing docker-compose.
+By default, Raspberry Pi OS has python3 installed. We need to install pip3 and other dependencies before installing docker-compose.
 
 ```sh
-sudo apt install -y phython3-pip
+sudo apt install -y phython3-pip libffi-dev
 ```
 
 Once the python3 and pip3 installed, we can install docker-compose.
