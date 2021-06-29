@@ -1,0 +1,50 @@
+version: "3"
+services:
+  db:
+    image: postgres:13.3-alpine
+    restart: always
+    volumes:
+      - db:/var/lib/postgresql/data
+    env_file: dotenv
+
+  redis:
+    image: redis:6.2.4-alpine
+    restart: always
+
+  app:
+    image: nextcloud:21.0.2-fpm-alpine
+    restart: always
+    volumes:
+      - app:/var/www/html
+    env_file: dotenv
+    depends_on:
+      - db
+      - redis
+
+  cron:
+    image: nextcloud:21.0.2-fpm-alpine
+    restart: always
+    volumes:
+      - app:/var/www/html
+    entrypoint: /cron.sh
+    depends_on:
+      - db
+      - redis
+
+  caddy:
+    build: ./caddy
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - app:/var/www/html
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile
+      - caddy:/root/.caddy
+    depends_on:
+      - app
+
+volumes:
+  db:
+  app:
+  caddy:
