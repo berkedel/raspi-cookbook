@@ -1,0 +1,10 @@
+:8080 {
+  reverse_proxy minio_console:9090
+}
+example.com {
+  tls {
+    dns cloudflare <CLOUDFLARE_API_TOKENS>
+  }
+
+  reverse_proxy minio:9000
+}

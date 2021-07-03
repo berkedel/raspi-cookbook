@@ -1,0 +1,17 @@
+## MinIO Config
+# Your Access Key
+MINIO_ROOT_USER=admin
+# Your Secret Key
+MINIO_ROOT_PASSWORD=SECRET
+
+## MinIO Console Config
+# Salt to encrypt JWT payload
+CONSOLE_PBKDF_PASSPHRASE=SECRET
+# Required to encrypt JWT payload
+CONSOLE_PBKDF_SALT=SECRET
+# Refer to your minio's access key
+CONSOLE_ACCESS_KEY=admin
+# Refer to your minio's secret key
+CONSOLE_SECRET_KEY=SECRET
+# Use default
+CONSOLE_MINIO_SERVER=http://minio:9000
